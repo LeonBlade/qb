@@ -6,8 +6,9 @@
  */
 
 #include "File.h"
+#include "Log.h"
 
-#ifdef _WIN32
+#ifndef _WIN32
 #include <sys/stat.h>
 #endif
 #include <algorithm>
@@ -19,16 +20,18 @@ string File::getExtension(const string &str) {
 
 bool File::exists(const string &filename) {
 
-#ifdef _SYS_STAT_H_
-	struct stat buffer;
-	return (stat(file, &buffer) == 0);
+#ifdef _WIN32
+	Log::debug("Using fopen() to check for file exist.");
+		if (FILE *file = fopen(filename.c_str(), "r")) {
+			fclose(file);
+			return true;
+		}
+		else
+			return false;
 #else
-	if (FILE *file = fopen(filename.c_str(), "r")) {
-		fclose(file);
-		return true;
-	}
-	else
-		return false;
+	Log::debug("Using stat() to check for file exist.");
+	struct stat buffer;
+	return (stat(filename.c_str(), &buffer) == 0);
 #endif
 
 	return false;

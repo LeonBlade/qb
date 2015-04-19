@@ -98,6 +98,13 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 
+	// does the input file exist
+	if (!File::exists(input)) {
+		Log::error("Input file '%s' does not exist!", input.c_str());
+
+		return 1;
+	}
+
 	// check against flags
 	if (flag == 'c') {
 		Log::info("Compiling '%s' ...", input.c_str());

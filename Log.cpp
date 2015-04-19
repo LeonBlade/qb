@@ -5,6 +5,8 @@
  *      Author: LeonBlade
  */
 
+#define __DEBUG__
+
 #include "Log.h"
 
 void Log::info(const char* message, ...) {
@@ -28,11 +30,22 @@ void Log::error(const char* message, ...) {
 	va_end(args);
 }
 
+void Log::debug(const char* message, ...) {
+#ifdef __DEBUG__
+	va_list args;
+	va_start(args, message);
+	Log::log(LOG_BUG, message, args);
+	va_end(args);
+#endif
+}
+
 void Log::log(LogType type, const char* message, va_list args) {
 	if (type == LOG_WARN)
 		printf("[WARN] ");
 	else if (type == LOG_ERR)
 		printf("[ERROR] ");
+	else if (type == LOG_BUG)
+		printf("[DEBUG] ");
 
 	va_list _args;
 	size_t size;

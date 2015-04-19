@@ -15,7 +15,8 @@
 enum LogType {
 	LOG_INFO,
 	LOG_WARN,
-	LOG_ERR
+	LOG_ERR,
+	LOG_BUG
 };
 
 class Log {
@@ -23,6 +24,7 @@ public:
 	static void info(const char* message, ...);
 	static void warning(const char* message, ...);
 	static void error(const char* message ...);
+	static void debug(const char* message, ...);
 
 private:
 	static void log(LogType type, const char* message, va_list args);

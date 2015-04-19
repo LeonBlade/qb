@@ -15,7 +15,7 @@ using namespace std;
 class File {
 public:
 	static string getExtension(const string &str);
-	static bool exists(const string &file);
+	static bool exists(const string &filename);
 	static bool isExtention(string haystack, string needle);
 };
 

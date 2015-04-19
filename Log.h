@@ -10,6 +10,7 @@
 
 #include <stdio.h>
 #include <stdarg.h>
+#include <stdlib.h>
 
 enum LogType {
 	LOG_INFO,
@@ -19,12 +20,12 @@ enum LogType {
 
 class Log {
 public:
-	static void info(const char *message, ...);
-	static void warning(const char *message, ...);
-	static void error(const char *message ...);
+	static void info(const char* message, ...);
+	static void warning(const char* message, ...);
+	static void error(const char* message ...);
 
 private:
-	static void log(LogType type, const char *message, va_list args);
+	static void log(LogType type, const char* message, va_list args);
 };
 
 #endif /* LOG_H_ */

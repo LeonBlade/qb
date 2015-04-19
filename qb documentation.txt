@@ -1,0 +1,76 @@
+OP | Name        | Additional Info
+-----------------------------------------------------------------------------------------
+00 : End Script        : Indicates the end of the script file
+01 : New Instruction    : Literally translated as line breaks from script source
+02 : End Of Line Number        : Followed by long value
+03 : Struct        : Followed by variable names and values
+04 : End Struct
+05 : Array        : Followed by values
+06 : End Array
+07 : Equals        : Followed by value
+08 : Dot      : Followed by member name
+09 : Comma
+0A : Minus        : Followed by value to subtract
+0B : Plus        : Followed by value to add
+0C : Multiply        : Followed by value to multiply
+0D : Divide        : Followed by value to divide
+0E : Nesting increase    : Literally translated as open parentheses from script source
+0F : Nesting decrease    : Literally translated as close parentheses from script source
+10 : never used
+11 : == Same as   : Basicly "Equals"
+12 : < Less Than    : IF (Something < SomethingElse)
+13 : <= Less Than
+14 : > More Than    : IF (Something > SomethingElse)
+15 : >= More Than
+16 : Symbol hash    : Followed by crc-32 hash of the symbol
+17 : Long Integer    : Followed by 32 bit long value
+18 : Hex Integer
+19 : Enum
+1A : Single Float    : Followed by a floating point number
+1B : String        : Followed by long value for strlen then null terminated string
+1C : String
+1D : Array
+1E : Vector        : Followed by 3 floating point numbers
+1F : Pair        : Followed by 2 floating point numbers
+20 : Begin      
+21 : Repeat
+22 : Break
+23 : Function        : Followed by function name hash
+24 : End Function
+25 : If
+26 : Else
+27 : ElseIf
+28 : Endif
+29 : Return
+2A : Undefined
+2B : Symbol entry    : Followed by crc-32 hash and symbol text
+2C : AllArgs      : isNULL
+2D : Argstack variable    : Used to address a variable passed as a function argument
+2E : Jump        : Followed by long offset to jump to
+2F : Random
+30 : Random Range
+31 : At   
+32 : Or            : Followed by second if condition
+33 : And
+34 : Or ?
+35 : << Shift Left
+36 : >> Shift Right
+37 : Random 2
+38 : Random range 2
+39 : Not        : Right after If, negates if condition
+3A : And
+3B : Or
+3C : Switch        : Followed by switch value and cases
+3D : Endswitch
+3E : Case        : Followed by short break and case value
+3F : Default Case    : Followed by default switch code
+40 : Random 
+41 : Random 
+42 : Colon
+43 : never used
+44 : never used
+45 : Unknown
+46 : Unknown
+47 : If            : Followed by short offset to next comparison
+48 : Else        : Followed by short offset to next comparison
+49 : Short break    : Followed by short offset to break to

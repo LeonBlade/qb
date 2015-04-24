@@ -9,6 +9,7 @@
 #define QB_H_
 
 #include "Log.h"
+#include "File.h"
 
 #include <string>
 
@@ -42,7 +43,7 @@ enum QB_OpCode {
 	QB_ENUM = 0x19,
 	QB_FLOAT = 0x1A,
 	QB_STRING = 0x1B,
-	QB_FMT_STRING = 0x1C,
+	QB_STRING_FMT = 0x1C,
 	QB_VECTOR3 = 0x1E,
 	QB_VECTOR2 = 0x1F,
 	QB_WHILE = 0x20,
@@ -82,31 +83,38 @@ enum QB_OpCode {
 	QB_BREAK = 0x49
 };
 
-struct QB_Instruction {
-	uint8_t op = QB_INSTRUCT;
-};
-
-struct QB_Symbol {
-	unsigned int id;
+struct QB_Name {
+	uint32_t id;
 	string name;
 
 	void generateID() {
-		Log::debug("TODO: implement generateID() for QB_Symbol struct");
+		Log::debug("TODO: implement generateID() for QB_Name struct");
+	}
+	const char* toString() {
+		const char* str = "ID: 0x%08X & Name: \"%s\"";
+		size_t bufsize = snprintf(NULL, 0, str, this->id, this->name.c_str());
+		char* buffer = (char*) malloc(bufsize);
+		sprintf(buffer, str, this->id, this->name.c_str());
+
+		return buffer;
 	}
 };
 
 struct QB_Array {
-
+	// TODO: implement QB_Array
 };
 
 struct QB_Struct {
-
+	// TODO: implement QB_Struct
 };
 
 class QB {
 public:
 	QB();
 	virtual ~QB();
+
+	bool compile(const char* input, const char* output);
+	bool decompile(const char* input, const char* output);
 };
 
 #endif /* QB_H_ */

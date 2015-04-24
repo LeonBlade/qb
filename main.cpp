@@ -5,6 +5,7 @@
  *      Author: LeonBlade
  */
 
+#include "QB.h"
 #include "Log.h"
 #include "File.h"
 
@@ -105,12 +106,16 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 
+	// new QB file
+	QB* qb = new QB();
+
 	// check against flags
 	if (flag == 'c') {
-		Log::info("Compiling '%s' ...", input.c_str());
+		Log::info("Compiling \"%s\" ...", input.c_str());
 	}
 	else if (flag == 'd') {
-		Log::info("Decompiling '%s' ...", input.c_str());
+		Log::info("Decompiling \"%s\" ...", input.c_str());
+		qb->decompile(input.c_str(), output.c_str());
 	}
 	else {
 		Log::error("Invalid flag!");
@@ -118,6 +123,8 @@ int main(int argc, char* argv[]) {
 
 		return 1;
 	}
+
+	Log::info("Done!");
 
 	return 0;
 }

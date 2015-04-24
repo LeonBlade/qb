@@ -47,3 +47,54 @@ bool File::isExtention(string haystack, string needle) {
 	return (extension == needle);
 }
 
+File::File() {
+	this->buffer = NULL;
+	this->file = NULL;
+	this->size = 0;
+	this->position = 0;
+}
+
+File::~File() {
+	fclose(this->file);
+}
+
+bool File::open(const char* filename, const char* mode) {
+	this->file = fopen(filename, mode);
+	fseek(this->file, 0, SEEK_END);
+	this->size = ftell(this->file);
+	rewind(this->file);
+
+	return (this->file != NULL);
+}
+
+uintptr_t* File::read(size_t size) {
+	this->buffer = (uintptr_t*) malloc(size);
+	size_t result = fread(this->buffer, size, 1, this->file);
+	// return the buffer if we read in an element otherwise return NULL to avoid returning what was last in the buffer
+	return (result > 0) ? (uintptr_t*)this->buffer : NULL;
+}
+
+uint8_t File::readByte() {
+	return (uint8_t) *this->read(1);
+}
+
+const char* File::readString() {
+	char buf = 0;
+	size_t size = 0;
+	do {
+		fread(&buf, 1, 1, this->file);
+		size++;
+	} while (buf != '\0');
+	// rewind bytes
+	fseek(this->file, -size, SEEK_CUR);
+	const char* str = (const char*) this->read(size);
+	return str;
+}
+
+bool File::eof() {
+	return (this->size <= this->getPosition());
+}
+
+long File::getPosition() {
+	return ftell(this->file);
+}
